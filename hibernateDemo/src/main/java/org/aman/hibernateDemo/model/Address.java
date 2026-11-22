@@ -2,7 +2,8 @@ package org.aman.hibernateDemo.model;
 
 import jakarta.persistence.Embeddable;
 
-@Embeddable
+@Embeddable // This annotation tells JPA that this class does not have its own independent database table.
+// Instead, its fields can be embedded into another entity's table.
 public class Address {
 
     private String houseNo;

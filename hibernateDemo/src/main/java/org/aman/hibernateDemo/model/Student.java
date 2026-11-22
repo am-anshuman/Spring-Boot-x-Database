@@ -54,7 +54,7 @@ public class Student {
     @Convert(converter = BooleanToStringConverter.class)
     private Boolean isMonitor;
 
-    @Embedded
+    @Embedded // @Embedded tells JPA that the fields of Address should become columns in the Student table.
     @AttributeOverrides({
             @AttributeOverride(
                     name = "houseNo",
@@ -104,10 +104,13 @@ public class Student {
     })
     private Address permanentAddress;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "student_skills",
-            joinColumns = @JoinColumn(name = "student_id")
+    @ElementCollection // Tells JPA that this field contains a collection of basic or embeddable values.
+    @CollectionTable( // Specifies the separate database table where collection values will be stored.
+            name = "student_skills", // Defines the collection table name.
+            joinColumns = // Defines the foreign key column connecting the collection table to the owner entity.
+                @JoinColumn(
+                    name = "student_id" // Specifies the foreign key column name.
+                )
     )
     private Set<String> skills;
 
