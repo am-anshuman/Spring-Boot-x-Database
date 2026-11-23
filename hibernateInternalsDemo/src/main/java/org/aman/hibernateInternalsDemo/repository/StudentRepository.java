@@ -1,0 +1,53 @@
+package org.aman.hibernateInternalsDemo.repository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.aman.hibernateInternalsDemo.model.Student;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class StudentRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public void save(Student student) {
+        entityManager.persist(student);
+    }
+
+    public void saveAll(List<Student> students) {
+        int counter = 0;
+
+        for (Student student : students) {
+            entityManager.persist(student);
+            counter++;
+
+            if(counter % 100 == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+    }
+
+    public Student findById(Long id) {
+        return entityManager.find(Student.class, id);
+    }
+
+    public void remove(Student student) {
+        entityManager.remove(student);
+    }
+
+    public void detach(Student student) {
+        entityManager.detach(student);
+    }
+
+    public Student attachAgain(Student student) {
+        return entityManager.merge(student);
+    }
+
+    public void flush() {
+        entityManager.flush();
+    }
+}
