@@ -15,7 +15,11 @@ public class DepartmentRepository {
         entityManager.persist(department);
     }
 
-    public Department getDepartmentById(Long id) {
+    public void remove(Department department) {
+        entityManager.remove(department);
+    }
+
+    public Department findById(Long id) {
         return entityManager.find(Department.class, id);
     }
 }

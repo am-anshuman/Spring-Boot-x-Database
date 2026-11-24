@@ -22,6 +22,11 @@ public class Department {
     private String name;
 
     // Inverse side
-    @OneToMany(mappedBy = "department")
+    @OneToMany(
+            mappedBy = "department",
+            // cascade = CascadeType.PERSIST
+            // cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
+    )
     private List<Student> students = new ArrayList<>();
 }
