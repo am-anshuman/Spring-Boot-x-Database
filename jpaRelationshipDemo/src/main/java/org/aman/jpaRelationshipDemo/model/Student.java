@@ -21,10 +21,11 @@ public class Student {
     private String name;
 
     // Owning side
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "dept_id",
-            nullable = false
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id")
     private Department department;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 }

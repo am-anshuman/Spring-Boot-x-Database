@@ -35,7 +35,7 @@ public class DepartmentService {
         s4.setName("Rohan");
         s4.setDepartment(department);
 
-        department.getStudents().addAll(List.of(s1, s2, s3, s4));
+        // department.getStudents().addAll(List.of(s1, s2, s3, s4));
 
         departmentRepository.save(department);
     }
