@@ -3,7 +3,10 @@ package org.aman.jpaRelationshipDemo.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.aman.jpaRelationshipDemo.model.Student;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class StudentRepository {
@@ -17,5 +20,13 @@ public class StudentRepository {
 
     public Student findById(Long id) {
         return entityManager.find(Student.class, id);
+    }
+
+    @EntityGraph(attributePaths = {"department", "profile"})
+    public List<Student> findAll() {
+
+        // code goes here
+
+        return null;
     }
 }
